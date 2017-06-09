@@ -1,21 +1,31 @@
 const electron_data = require('electron-data');
 document.getElementById("submit").addEventListener("click", getsettings);
-document.getElementById("preview").addEventListener("click", run);
+document.getElementById("preview").addEventListener("click", preview);
+document.getElementById("record").addEventListener("click", record);
 electron_data.config({
-    filename: 'electron_test',
+    filename: 'audiorecordergui',
 });
 var exec = require('child_process').exec;
-var cmd = 'audiorecorder -p'
 
 function getsettings() {
     var bitdepth = document.querySelector('input[name = "bitdepth"]:checked').value;
     var samplerate = document.querySelector('input[name = "samplerate"]:checked').value;
     var channels = document.querySelector('input[name = "channels"]:checked').value;
-electron_data.set('settings', {'br': bitdepth,'sr': samplerate,'ch': channels})
+    var destination = document.getElementById("outputlocation").value;
+    var id = document.getElementById("itemid").value;
+electron_data.set('settings', {'br': bitdepth,'sr': samplerate,'ch': channels,'dest': destination,'id': id})
 electron_data.save()
 }
 
-function run() {
+function preview() {
+    var cmd = 'app/scripts/audiorecorder.sh -p'
+    exec(cmd, function(error, stdout, stderr) {
+  // command output is in stdout
+})
+}
+
+function record() {
+    var cmd = 'app/scripts/audiorecorder.sh'
     exec(cmd, function(error, stdout, stderr) {
   // command output is in stdout
 })
