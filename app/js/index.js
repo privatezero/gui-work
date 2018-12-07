@@ -18,7 +18,7 @@ electron_data.save()
 }
 
 function preview() {
-    var cmd = 'xterm -e app/scripts/audiorecorder.sh -p'
+    var cmd = 'xterm -e ruby app/scripts/audiopreview.rb'
     exec(cmd, function(error, stdout, stderr) {
   // command output is in stdout
 })
