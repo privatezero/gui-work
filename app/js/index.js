@@ -18,14 +18,14 @@ electron_data.save()
 }
 
 function preview() {
-    var cmd = 'app/scripts/audiorecorder.sh -p'
+    var cmd = 'xterm -e app/scripts/audiorecorder.sh -p'
     exec(cmd, function(error, stdout, stderr) {
   // command output is in stdout
 })
 }
 
 function record() {
-    var cmd = 'app/scripts/audiorecorder.sh'
+    var cmd = 'xterm -e app/scripts/audiorecorder.sh'
     exec(cmd, function(error, stdout, stderr) {
   // command output is in stdout
 })
