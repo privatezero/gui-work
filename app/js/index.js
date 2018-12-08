@@ -18,14 +18,14 @@ electron_data.save()
 }
 
 function preview() {
-    var cmd = 'xterm -e "ruby app/scripts/audiopreview.rb p;bash"'
+    var cmd = 'xterm -e "ruby app/scripts/audiopreview.rb p"'
     exec(cmd, function(error, stdout, stderr) {
   // command output is in stdout
 })
 }
 
 function record() {
-    var cmd = 'xterm -e "ruby app/scripts/audiopreview.rb r;bash"'
+    var cmd = 'xterm -e "ruby app/scripts/audiopreview.rb r"'
     exec(cmd, function(error, stdout, stderr) {
   // command output is in stdout
 })

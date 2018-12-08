@@ -94,21 +94,21 @@ def BufferCheck(sr)
   end
 end
 
-# Preview mode
-# if Runmode = "p"
-#   BufferCheck($sample_rate_choice)
-#   Soxcommand = Soxpath + ' -r ' + $sample_rate_choice + ' -b 32 -L -e signed-integer --buffer ' + $soxbuffer + ' -p remix ' + sox_channels
-#   FFmpegSTART = Ffmpegpath + ' -channel_layout ' + ffmpeg_channels + ' -i - '
-#   FFmpegPreview = '-f wav -c:a ' + 'pcm_s16le -dither_method triangular' + ' -ar ' + '44100' + ' -'
-#   FFplaycommand = Ffplaypath + ' -window_title "AudioRecorder" -f lavfi ' + '"' + 'amovie=\'pipe\:0\'' + ',' + FILTER_CHAIN + '"' 
-#   ffmpegcommand = FFmpegSTART + FFmpegPreview
-#   command = Soxcommand + ' | ' + ffmpegcommand + ' | ' + FFplaycommand
-#   puts command
-#   system(command)
-# end
+#Preview mode
+if Runmode == "p"
+  BufferCheck($sample_rate_choice)
+  Soxcommand = Soxpath + ' -r ' + $sample_rate_choice + ' -b 32 -L -e signed-integer --buffer ' + $soxbuffer + ' -p remix ' + sox_channels
+  FFmpegSTART = Ffmpegpath + ' -channel_layout ' + ffmpeg_channels + ' -i - '
+  FFmpegPreview = '-f wav -c:a ' + 'pcm_s16le -dither_method triangular' + ' -ar ' + '44100' + ' -'
+  FFplaycommand = Ffplaypath + ' -window_title "AudioRecorder" -f lavfi ' + '"' + 'amovie=\'pipe\:0\'' + ',' + FILTER_CHAIN + '"' 
+  ffmpegcommand = FFmpegSTART + FFmpegPreview
+  command = Soxcommand + ' | ' + ffmpegcommand + ' | ' + FFplaycommand
+  puts command
+  system(command)
+end
 
 # Record mode
-if Runmode = "r"
+if Runmode == "r"
   if ! defined? $record_iteration
     $record_iteration = 1
   else
