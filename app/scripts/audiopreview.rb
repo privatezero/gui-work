@@ -3,6 +3,8 @@
 require 'yaml'
 require 'json'
 
+Runmode = ARGV[0]
+
 if RUBY_PLATFORM.include?('linux')
   Drawfontpath = '/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf'
   Soxpath = 'rec'
@@ -60,6 +62,7 @@ $outputdir = config['settings']['dest']
 $sample_rate_choice = config['settings']['sr']
 sox_channels = config['settings']['ch']
 $codec_choice = config['settings']['br']
+$filename = config['settings']['id']
 # $originator = config['orig']
 # $history = config['hist']
 # $embedbext = config['bext']
@@ -91,12 +94,45 @@ def BufferCheck(sr)
   end
 end
 
-BufferCheck($sample_rate_choice)
-Soxcommand = Soxpath + ' -r ' + $sample_rate_choice + ' -b 32 -L -e signed-integer --buffer ' + $soxbuffer + ' -p remix ' + sox_channels
-FFmpegSTART = Ffmpegpath + ' -channel_layout ' + ffmpeg_channels + ' -i - '
-FFmpegPreview = '-f wav -c:a ' + 'pcm_s16le -dither_method triangular' + ' -ar ' + '44100' + ' -'
-FFplaycommand = Ffplaypath + ' -window_title "AudioRecorder" -f lavfi ' + '"' + 'amovie=\'pipe\:0\'' + ',' + FILTER_CHAIN + '"' 
-ffmpegcommand = FFmpegSTART + FFmpegPreview
-command = Soxcommand + ' | ' + ffmpegcommand + ' | ' + FFplaycommand
-puts command
-system(command)
+# Preview mode
+# if Runmode = "p"
+#   BufferCheck($sample_rate_choice)
+#   Soxcommand = Soxpath + ' -r ' + $sample_rate_choice + ' -b 32 -L -e signed-integer --buffer ' + $soxbuffer + ' -p remix ' + sox_channels
+#   FFmpegSTART = Ffmpegpath + ' -channel_layout ' + ffmpeg_channels + ' -i - '
+#   FFmpegPreview = '-f wav -c:a ' + 'pcm_s16le -dither_method triangular' + ' -ar ' + '44100' + ' -'
+#   FFplaycommand = Ffplaypath + ' -window_title "AudioRecorder" -f lavfi ' + '"' + 'amovie=\'pipe\:0\'' + ',' + FILTER_CHAIN + '"' 
+#   ffmpegcommand = FFmpegSTART + FFmpegPreview
+#   command = Soxcommand + ' | ' + ffmpegcommand + ' | ' + FFplaycommand
+#   puts command
+#   system(command)
+# end
+
+# Record mode
+if Runmode = "r"
+  if ! defined? $record_iteration
+    $record_iteration = 1
+  else
+    $record_iteration = $record_iteration + 1
+  end
+  if $outputdir.nil?
+    $outputdir = ''
+  end
+  $waveform_pic = $outputdir + '/' + 'AUDIORECORDERTEMP' + $record_iteration.to_s + '.jpg'
+  BufferCheck($sample_rate_choice)
+  @fileoutput = $outputdir + '/' + $filename + '.wav'
+  # if $filename == ''
+  #   alert "Please enter an output file name!"
+  # elsif File.exist?(@fileoutput)
+  #   alert "A File named #{$filename} already exists at that location!"
+  # elsif ! File.exist?($outputdir)
+  #   alert "Please enter a valid output Directory!"
+  # else
+  Soxcommand = Soxpath + ' -r ' + $sample_rate_choice + ' -b 32 -L -e signed-integer --buffer ' + $soxbuffer + ' -p remix ' + sox_channels
+  FFmpegSTART = Ffmpegpath + ' -channel_layout ' + ffmpeg_channels + ' -i - '
+  FFmpegRECORD = '-f wav -c:a ' + $codec_choice  + ' -dither_method triangular -ar ' + $sample_rate_choice + ' -metadata comment="" -y -rf64 auto ' + @fileoutput
+  FFmpegPreview = ' -f wav -c:a ' + 'pcm_s16le -dither_method triangular' + ' -ar ' + '44100' + ' -'
+  FFplaycommand = Ffplaypath + ' -window_title "AudioRecorder" -f lavfi ' + '"' + 'amovie=\'pipe\:0\'' + ',' + FILTER_CHAIN + '"' 
+  ffmpegcommand = FFmpegSTART + FFmpegRECORD + FFmpegPreview
+  syscommand1 = Soxcommand + ' | ' + ffmpegcommand + ' | ' + FFplaycommand
+  system(syscommand1)  
+end
