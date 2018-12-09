@@ -1,5 +1,8 @@
-const electron_data = require('electron-data');
+const Store = require('electron-store');
+const store = new Store();
 const {dialog, app} = require('electron').remote;
+
+const exec = require('child_process').exec;
 
 document.getElementById("saveSettings").addEventListener("click", getSettings);
 document.getElementById("preview").addEventListener("click", preview);
@@ -10,14 +13,16 @@ saveAs.addEventListener("click", event => {
     event.preventDefault();
     const savePath = dialog.showSaveDialog({defaultPath: app.getPath("desktop") });
     document.getElementById("saveAsValue").innerText = savePath;
-    console.log(savePath);
     event.stopPropagation();
 });
 
-electron_data.config({
-    filename: 'audiorecordergui',
-});
-var exec = require('child_process').exec;
+function loadSettings() {
+    document.getElementById(store.get('br')).checked = true;
+    document.getElementById(store.get('sr')).checked = true;
+    document.getElementById(store.get('ch')).checked = true;
+}
+
+loadSettings();
 
 function getSettings() {
     var fullPath = document.getElementById("saveAsValue").innerText;
@@ -25,14 +30,16 @@ function getSettings() {
     var bitdepth = document.querySelector('input[name = "bitdepth"]:checked').value;
     var samplerate = document.querySelector('input[name = "samplerate"]:checked').value;
     var channels = document.querySelector('input[name = "channels"]:checked').value;
+    // TODO, work with both Mac/Linux and Windows type file paths
     var destination = fullPath.substring(0, fullPath.lastIndexOf("/"));
     var id = fullPath.replace(/^.*[\\\/]/, '');
 
-    electron_data.set('settings', {'br': bitdepth,'sr': samplerate,'ch': channels,'dest': destination,'id': id})
-    electron_data.save()
+    store.set('br', bitdepth);
+    store.set('sr', samplerate);
+    store.set('ch', channels);
+    store.set('dest', destination);
+    store.set('id', id);
 }
-
-
 
 function preview() {
     getSettings()
