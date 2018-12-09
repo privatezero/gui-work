@@ -9,7 +9,7 @@
   "author": "Andrew Weaver",
   "license": "BSD 3-Clause",
   "devDependencies": {
-    "electron": "^1.6.2",
+    "electron": "^3.0.10",
     "shx": "^0.2.2"
   },
   "dependencies": {
