@@ -10,9 +10,86 @@
     font-style: normal;
     }
     
-	body {
-		font-family: 'League Spartan';
-		font-weight: 300;
-		font-size: 1rem;
-		line-height: 1.65;
-	}
+body {
+    font-family: 'League Spartan';
+    font-weight: 300;
+    font-size: 1rem;
+    line-height: 1.65;
+    display: grid;
+    justify-items: center;
+}
+
+h2 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.logo {
+    justify-self: center;
+}
+
+form {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 175px 175px 175px;
+}
+
+form input {
+    display: block;
+    float: left;
+    cursor: pointer;
+    margin-right: 18px;
+    font-size: 1rem;
+}
+
+input[type='radio'] { 
+    transform: scale(2); 
+}
+
+form label {
+    display: block;
+    cursor: pointer;
+    padding: 0.33rem;
+}
+
+#outputlocation {
+    font-size: 0.85rem;
+}
+
+div {
+    width: 175px;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.sampleRate, .bitDepth, .inputChannels {
+    float: left;
+}
+
+.location {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 250px 250px;
+}
+
+.buttons {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-content: center;
+}
+
+button {
+    padding: .5em 1.25em;
+    background: transparent;
+    border: 1px solid grey;
+    border-radius: .25em;
+    font-size: 1rem;
+    cursor: pointer;
+    float: left;
+}
+
+button:hover {
+    background: lightgrey;
+}
