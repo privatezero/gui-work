@@ -1,27 +1,37 @@
 <html>
 <link rel="stylesheet" href="css/main.css" />
 <body>
-    <img src="img/audiorecorder_play_small.gif">
+    <img class="logo" src="img/audiorecorder_play_small.gif">
     <form id="settings"> 
-        Sample Rate<br>
-        <input type="radio" name="samplerate" value="44100">44.1 kHz<br>
-        <input type="radio" name="samplerate" value="48000">48 kHz<br>
-        <input type="radio" name="samplerate" value="96000">96 kHz<br>
-        Bit Depth<br>
-        <input type="radio" name="bitdepth" value="pcm_s16le">16 bit<br>
-        <input type="radio" name="bitdepth" value="pcm_s24le">24 bit<br>
-        Input Channels<br>
-        <input type="radio" name="channels" value="1">1<br>
-        <input type="radio" name="channels" value="2">2<br>
-        <input type="radio" name="channels" value="1 2">1 and 2<br><br>
-        Output Location<br>
-        <input type="text" id="outputlocation" name="outputlocation"><br><br>
-        Item ID<br>
-        <input type="text" id="itemid" name="itemid"><br><br>
+        <div class="sampleRate">
+            <h2>Sample Rate</h2>
+            <input type="radio" name="samplerate" value="44100"><label for="samplerate">44.1 kHz</label>
+            <input type="radio" name="samplerate" value="48000"><label for="samplerate">48 kHz</label>
+            <input type="radio" name="samplerate" value="96000"><label for="samplerate">96 kHz</label>
+        </div>
+        <div class="bitDepth">
+            <h2>Bit Depth</h2>
+            <input type="radio" name="bitdepth" value="pcm_s16le"><label for="bitdepth">16 Bit</label>
+            <input type="radio" name="bitdepth" value="pcm_s24le"><label for="bitdepth">24 Bit</label>
+        </div>
+        <div class="inputChannels">
+            <h2>Input Channels</h2>
+            <input type="radio" name="channels" value="1"><label for="channels">1</label>
+            <input type="radio" name="channels" value="2"><label for="channels">2</label>
+            <input type="radio" name="channels" value="1 2"><label for="channels">1 & 2</label>
+        </div>
+        <div class="location">
+            <h2>Output Folder</h2>
+            <input type="text" id="outputlocation" name="outputlocation">
+            <h2>Item Name/ID</h2>
+            <input type="text" id="itemid" name="itemid">
+        </div>
     </form>
-    <button id="submit" class="button">Save Settings</button>
-    <button id="preview" class="button">Preview</button>
-    <button id="record" class="button">Record</button>
+    <div class="buttons">
+        <button id="submit" class="button">Save Settings</button>
+        <button id="preview" class="button">Preview</button>
+        <button id="record" class="button">Record</button>
+    </div>
     <script src="js/index.js"></script>
     </body>
 </html>
