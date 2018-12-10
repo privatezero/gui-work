@@ -1,6 +1,8 @@
 const {dialog, app} = require('electron').remote;
 const Store = require('electron-store');
 const store = new Store({cwd: app.getPath('home') + '/audiorecordergui'});
+const path = require('path');
+const savePath = '';
 
 const exec = require('child_process').exec;
 
@@ -11,7 +13,14 @@ document.getElementById("record").addEventListener("click", record);
 const saveAs = document.getElementById("saveAs");
 saveAs.addEventListener("click", event => {
     event.preventDefault();
-    const savePath = dialog.showSaveDialog({defaultPath: app.getPath("desktop") });
+    const savePath = dialog.showSaveDialog({
+        defaultPath: app.getPath("desktop"),
+        filters: [{
+          name: 'WAV',
+          extensions: ['wav']
+        }]
+    });
+
     document.getElementById("saveAsValue").innerText = savePath;
     event.stopPropagation();
 });
@@ -25,14 +34,12 @@ function loadSettings() {
 loadSettings();
 
 function getSettings() {
-    var fullPath = document.getElementById("saveAsValue").innerText;
-
     var bitdepth = document.querySelector('input[name = "bitdepth"]:checked').value;
     var samplerate = document.querySelector('input[name = "samplerate"]:checked').value;
     var channels = document.querySelector('input[name = "channels"]:checked').value;
-    // TODO, work with both Mac/Linux and Windows type file paths
-    var destination = fullPath.substring(0, fullPath.lastIndexOf("/"));
-    var id = fullPath.replace(/^.*[\\\/]/, '');
+
+    var destination = path.dirname(savePath);
+    var id = path.basename(savePath);
 
     store.set('br', bitdepth);
     store.set('sr', samplerate);
