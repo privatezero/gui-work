@@ -13,6 +13,6 @@
     "shx": "^0.2.2"
   },
   "dependencies": {
-    "electron-store": "^2.0.0"
+    "electron-data": "^2.1.0"
   }
 }
