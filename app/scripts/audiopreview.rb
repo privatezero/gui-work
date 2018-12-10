@@ -32,7 +32,7 @@ else
 end
 
 FILTER_CHAIN = "asplit=6[out1][a][b][c][d][e],\
-[e]showvolume=w=700:c=0xff0000:r=30[e1],\
+[e]showvolume=w=700:r=60:dm=1:c=0xFFFFFF00:dmc=white[e1],\
 [a]showfreqs=mode=bar:cmode=separate:size=300x300:colors=magenta|yellow[a1],\
 [a1]drawbox=12:0:3:300:white@0.2[a2],[a2]drawbox=66:0:3:300:white@0.2[a3],[a3]drawbox=135:0:3:300:white@0.2[a4],[a4]drawbox=202:0:3:300:white@0.2[a5],[a5]drawbox=271:0:3:300:white@0.2[aa],\
 [b]#{Avectorscopefilter}[b1],\
@@ -40,7 +40,7 @@ FILTER_CHAIN = "asplit=6[out1][a][b][c][d][e],\
 [c]showspectrum=s=400x600:slide=scroll:mode=combined:color=rainbow:scale=lin:saturation=4[cc],\
 [d]astats=metadata=1:reset=1,adrawgraph=lavfi.astats.Overall.Peak_level:max=0:min=-30.0:size=700x256:bg=Black[dd],\
 [dd]drawbox=0:0:700:42:hotpink@0.2:t=42[ddd],\
-[aa][bb]vstack[aabb],[aabb][cc]hstack[aabbcc],[aabbcc][ddd]vstack[aabbccdd],[e1][aabbccdd]vstack[z],\
+[e1][aa][bb][cc][ddd]xstack=inputs=5:layout=0_0|0_h0|0_h0+h1|w1_h0|0_h3[z],\
 [z]drawtext=fontfile=#{Drawfontpath}: text='%{pts \\: hms}':x=460: y=50:fontcolor=white:fontsize=30:box=1:boxcolor=0x00000000@1[fps],[fps]fps=fps=30[out0]"
 
 # Set Configuration
