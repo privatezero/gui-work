@@ -1,6 +1,6 @@
-const Store = require('electron-store');
-const store = new Store();
 const {dialog, app} = require('electron').remote;
+const Store = require('electron-store');
+const store = new Store({cwd: app.getPath('home') + '/audiorecordergui'});
 
 const exec = require('child_process').exec;
 
