@@ -25,11 +25,7 @@ else
   Drawfontpath = 'some windows path'
 end
 
-if system('#{Ffmpegpath} -version | grep "ffmpeg version 4.0.0\|ffmpeg version 4.0.1\|ffmpeg version 4.0.2"')
-    Avectorscopefilter = 'avectorscope=s=300x300:r=30:zoom=5:mirror=0'
-else
-    Avectorscopefilter = 'avectorscope=s=300x300:r=30:zoom=5'
-end
+Avectorscopefilter = 'avectorscope=s=300x300:r=30:zoom=5'
 
 FILTER_CHAIN = "asplit=6[out1][a][b][c][d][e],\
 [e]showvolume=w=700:c=0xff0000:r=30[e1],\
