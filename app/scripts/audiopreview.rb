@@ -52,17 +52,17 @@ $sample_rate_choice = '96000'
 $filename = ''
 
 # Load options from config file
-configuration_file = File.expand_path("~/.electron-app/audiorecordergui.json")
+configuration_file = File.expand_path("~/audiorecordergui/config.json")
 if ! File.exist?(configuration_file)
   config_options = "destination:\nsamplerate:\nchannels:\ncodec:\norig:\nhist:\nbext:"
   File.write(configuration_file, config_options)
 end
 config = YAML::load_file(configuration_file)
-$outputdir = config['settings']['dest']
-$sample_rate_choice = config['settings']['sr']
-sox_channels = config['settings']['ch']
-$codec_choice = config['settings']['br']
-$filename = config['settings']['id']
+$outputdir = config['dest']
+$sample_rate_choice = config['sr']
+sox_channels = config['ch']
+$codec_choice = config['br']
+$filename = config['id']
 # $originator = config['orig']
 # $history = config['hist']
 # $embedbext = config['bext']

@@ -5,30 +5,28 @@
     <form id="settings"> 
         <div class="sampleRate">
             <h2>Sample Rate</h2>
-            <input type="radio" name="samplerate" value="44100"><label for="samplerate">44.1 kHz</label>
-            <input type="radio" name="samplerate" value="48000"><label for="samplerate">48 kHz</label>
-            <input type="radio" name="samplerate" value="96000"><label for="samplerate">96 kHz</label>
+            <input type="radio" name="samplerate" id="44100" value="44100"><label for="samplerate">44.1 kHz</label>
+            <input type="radio" name="samplerate" id="48000" value="48000"><label for="samplerate">48 kHz</label>
+            <input type="radio" name="samplerate" id="96000" value="96000"><label for="samplerate">96 kHz</label>
         </div>
         <div class="bitDepth">
             <h2>Bit Depth</h2>
-            <input type="radio" name="bitdepth" value="pcm_s16le"><label for="bitdepth">16 Bit</label>
-            <input type="radio" name="bitdepth" value="pcm_s24le"><label for="bitdepth">24 Bit</label>
+            <input type="radio" name="bitdepth" id="pcm_s16le" value="pcm_s16le"><label for="bitdepth">16 Bit</label>
+            <input type="radio" name="bitdepth" id="pcm_s24le" value="pcm_s24le"><label for="bitdepth">24 Bit</label>
         </div>
         <div class="inputChannels">
             <h2>Input Channels</h2>
-            <input type="radio" name="channels" value="1"><label for="channels">1</label>
-            <input type="radio" name="channels" value="2"><label for="channels">2</label>
-            <input type="radio" name="channels" value="1 2"><label for="channels">1 & 2</label>
+            <input type="radio" name="channels" id="1" value="1"><label for="channels">1</label>
+            <input type="radio" name="channels" id="2" value="2"><label for="channels">2</label>
+            <input type="radio" name="channels" id="1 2" value="1 2"><label for="channels">1 & 2</label>
         </div>
         <div class="location">
-            <h2>Output Folder</h2>
-            <input type="file" webkitdirectory id="outputlocation" name="outputlocation">
-            <h2>Item Name/ID</h2>
-            <input type="text" id="itemid" name="itemid">
+            <button id="saveAs">Save as...</button><br/>
+            <span id="saveAsValue"></span>
         </div>
     </form>
     <div class="buttons">
-        <button id="submit" class="button">Save Settings</button>
+        <button id="saveSettings" class="button">Save Settings</button>
         <button id="preview" class="button">Preview</button>
         <button id="record" class="button">Record</button>
     </div>
