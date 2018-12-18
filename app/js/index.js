@@ -1,6 +1,6 @@
 const {dialog, app} = require('electron').remote;
 const Store = require('electron-store');
-const store = new Store({cwd: app.getPath('home') + '/audiorecordergui'});
+const store = new Store({cwd: app.getPath('home') + '/.audiorecordergui'});
 const path = require('path');
 const savePath = '';
 
