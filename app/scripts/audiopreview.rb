@@ -25,6 +25,23 @@ else
   Drawfontpath = 'some windows path'
 end
 
+# Local Functions
+#BWF Metaedit Function
+def EmbedBEXT(targetfile)
+  moddatetime = File.mtime(targetfile)
+  moddate = moddatetime.strftime("%Y-%m-%d")
+  modtime = moddatetime.strftime("%H:%M:%S")
+
+  #Get Input Name for Description and OriginatorReference
+  file_name = File.basename(targetfile)
+  originatorreference = File.basename(targetfile, '.wav')
+  if originatorreference.length > 32
+    originatorreference = "See Description for Identifiers"
+  end
+  bwfcommand = Bwfmetaeditpath + ' --reject-overwrite ' + '--Description=' + "'" + file_name + "'"  + ' --Originator=' + "'" + $originator + "'" + ' --History=' + "'" + $history + "'" + ' --OriginatorReference=' + "'" + originatorreference + "'" + ' --OriginationDate=' + moddate + ' --OriginationTime=' + modtime + ' --MD5-Embed ' + "'" + targetfile + "'"
+  system(bwfcommand)
+end
+
 FILTER_CHAIN = "asplit=6[out1][a][b][c][d][e],\
 [e]showvolume=w=700:r=60:dm=1:c=0xFFFFFF00:dmc=white[e1],\
 [a]showfreqs=mode=bar:cmode=separate:size=300x300:colors=magenta|yellow[a1],\
@@ -57,9 +74,9 @@ $sample_rate_choice = config['sr']
 sox_channels = config['ch']
 $codec_choice = config['br']
 $filename = config['id']
-# $originator = config['orig']
-# $history = config['hist']
-# $embedbext = config['bext']
+$originator = config['orig']
+$history = config['hist']
+$embedbext = config['bext']
 
 #BWF Metaedit Function
 def EmbedBEXT(targetfile)
