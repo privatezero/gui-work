@@ -49,8 +49,6 @@ function getSettings() {
 }
 
 function preview() {
-    getSettings()
-
     var cmd = 'xterm -e "ruby app/scripts/audiopreview.rb p"'
     exec(cmd, function(error, stdout, stderr) {
         // command output is in stdout
@@ -58,8 +56,6 @@ function preview() {
 }
 
 function record() {
-    getSettings()
-    
     var cmd = 'xterm -e "ruby app/scripts/audiopreview.rb r"'
     exec(cmd, function(error, stdout, stderr) {
         // command output is in stdout
