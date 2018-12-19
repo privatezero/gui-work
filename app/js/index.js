@@ -38,8 +38,8 @@ function getSettings() {
     var samplerate = document.querySelector('input[name = "samplerate"]:checked').value;
     var channels = document.querySelector('input[name = "channels"]:checked').value;
 
-    var destination = path.dirname(savePath);
-    var id = path.basename(savePath);
+    var destination = document.getElementById('destination').value;
+    var id = document.getElementById('fileID').value;
 
     store.set('br', bitdepth);
     store.set('sr', samplerate);
