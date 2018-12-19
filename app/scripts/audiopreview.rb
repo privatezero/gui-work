@@ -46,7 +46,7 @@ $sample_rate_choice = '96000'
 $filename = ''
 
 # Load options from config file
-configuration_file = File.expand_path("~/audiorecordergui/config.json")
+configuration_file = File.expand_path("~/.audiorecordergui/config.json")
 if ! File.exist?(configuration_file)
   config_options = "destination:\nsamplerate:\nchannels:\ncodec:\norig:\nhist:\nbext:"
   File.write(configuration_file, config_options)
