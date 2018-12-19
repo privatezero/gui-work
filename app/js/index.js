@@ -8,22 +8,7 @@ const exec = require('child_process').exec;
 
 document.getElementById("saveSettings").addEventListener("click", getSettings);
 document.getElementById("preview").addEventListener("click", preview);
-document.getElementById("record").addEventListener("click", record);
-
-const saveAs = document.getElementById("saveAs");
-saveAs.addEventListener("click", event => {
-    event.preventDefault();
-    const savePath = dialog.showSaveDialog({
-        defaultPath: app.getPath("desktop"),
-        filters: [{
-          name: 'WAV',
-          extensions: ['wav']
-        }]
-    });
-
-    document.getElementById("saveAsValue").innerText = savePath;
-    event.stopPropagation();
-});
+document.getElementById("record").addEventListener("click", checkRecord);
 
 function loadSettings() {
     document.getElementById(store.get('br')).checked = true;
@@ -55,6 +40,26 @@ function preview() {
     exec(cmd, function(error, stdout, stderr) {
         // command output is in stdout
     })
+}
+
+function checkRecord() {
+
+    const opts = {
+        type: 'warning',
+        buttons: ['OK'],
+        title: 'Warning',
+        message: "You are missing a required setting!"
+    };
+
+    var destination = document.getElementById('destination').value;
+    var id = document.getElementById('fileID').value;
+    if (destination == undefined || id == undefined) {
+        dialog.showMessageBox(null, opts, (response) => {
+            // nothing
+        });
+    } else {
+        record();
+    }
 }
 
 function record() {
