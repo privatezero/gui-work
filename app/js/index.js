@@ -53,7 +53,8 @@ function checkRecord() {
 
     var destination = document.getElementById('destination').value;
     var id = document.getElementById('fileID').value;
-    if (destination == undefined || id == undefined) {
+
+    if (destination == "" || id == "") {
         dialog.showMessageBox(null, opts, (response) => {
             // nothing
         });
