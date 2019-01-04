@@ -78,22 +78,6 @@ $originator = config['orig']
 $history = config['hist']
 $embedbext = config['bext']
 
-#BWF Metaedit Function
-def EmbedBEXT(targetfile)
-  moddatetime = File.mtime(targetfile)
-  moddate = moddatetime.strftime("%Y-%m-%d")
-  modtime = moddatetime.strftime("%H:%M:%S")
-
-  #Get Input Name for Description and OriginatorReference
-  file_name = File.basename(targetfile)
-  originatorreference = File.basename(targetfile, '.wav')
-  if originatorreference.length > 32
-    originatorreference = "See Description for Identifiers"
-  end
-  bwfcommand = Bwfmetaeditpath + ' --reject-overwrite ' + '--Description=' + "'" + file_name + "'"  + ' --Originator=' + "'" + $originator + "'" + ' --History=' + "'" + $history + "'" + ' --OriginatorReference=' + "'" + originatorreference + "'" + ' --OriginationDate=' + moddate + ' --OriginationTime=' + modtime + ' --MD5-Embed ' + "'" + targetfile + "'"
-  system(bwfcommand)
-end
-
 #Function for adjusting buffer
 def BufferCheck(sr)
   if sr == '96000'
@@ -145,5 +129,8 @@ if Runmode == "r"
   FFplaycommand = Ffplaypath + ' -window_title "AudioRecorder" -f lavfi ' + '"' + 'amovie=\'pipe\:0\'' + ',' + FILTER_CHAIN + '"' 
   ffmpegcommand = FFmpegSTART + FFmpegRECORD + FFmpegPreview
   syscommand1 = Soxcommand + ' | ' + ffmpegcommand + ' | ' + FFplaycommand
-  system(syscommand1)  
+  system(syscommand1)
+  if $embedbext == 'bext_on'
+    EmbedBEXT(@fileoutput)
+  end
 end
