@@ -14,6 +14,7 @@ function loadSettings() {
     document.getElementById(store.get('br')).checked = true;
     document.getElementById(store.get('sr')).checked = true;
     document.getElementById(store.get('ch')).checked = true;
+    document.getElementById(store.get('bext')).checked = true;
 }
 
 loadSettings();
@@ -22,6 +23,7 @@ function getSettings() {
     var bitdepth = document.querySelector('input[name = "bitdepth"]:checked').value;
     var samplerate = document.querySelector('input[name = "samplerate"]:checked').value;
     var channels = document.querySelector('input[name = "channels"]:checked').value;
+    var bextchoice = document.querySelector('input[name = "bextchoice"]:checked').value;
 
     var destination = document.getElementById('destination').value;
     var id = document.getElementById('fileID').value;
@@ -29,6 +31,7 @@ function getSettings() {
     store.set('br', bitdepth);
     store.set('sr', samplerate);
     store.set('ch', channels);
+    store.set('bext',bextchoice);
     store.set('dest', destination);
     store.set('id', id);
 }
