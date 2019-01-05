@@ -64,7 +64,7 @@ div {
     box-sizing: border-box;
 }
 
-.sampleRate, .bitDepth, .inputChannels {
+.sampleRate, .bitDepth, .inputChannels .bextOptions{
     float: left;
 }
 
