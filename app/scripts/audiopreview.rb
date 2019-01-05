@@ -11,7 +11,7 @@ if RUBY_PLATFORM.include?('linux')
   Ffmpegpath = 'ffmpeg'
   Ffplaypath = 'ffplay'
   Ffprobepath = 'ffprobe'
-  Bwfmetaeditpath = 'bwfmetaedit'
+  Bwfmetaeditpath = 'app/dependencies/linux/bwfmetaedit'
   Mpvpath = 'mpv'
 elsif RUBY_PLATFORM.include?('darwin')
   Drawfontpath = '/Library/Fonts/Andale Mono.ttf'
