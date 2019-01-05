@@ -6,18 +6,34 @@ const savePath = '';
 
 const exec = require('child_process').exec;
 
-document.getElementById("saveSettings").addEventListener("click", getSettings);
+document.getElementById("saveSettings").addEventListener("click", saveSettings);
 document.getElementById("preview").addEventListener("click", preview);
 document.getElementById("record").addEventListener("click", checkRecord);
 
 function loadSettings() {
-    document.getElementById(store.get('br')).checked = true;
-    document.getElementById(store.get('sr')).checked = true;
-    document.getElementById(store.get('ch')).checked = true;
-    document.getElementById(store.get('bext')).checked = true;
+    document.getElementById(store.get('stored-br')).checked = true;
+    document.getElementById(store.get('stored-sr')).checked = true;
+    document.getElementById(store.get('stored-ch')).checked = true;
+    document.getElementById(store.get('stored-bext')).checked = true;
 }
 
 loadSettings();
+
+function saveSettings() {
+    var bitdepth = document.querySelector('input[name = "bitdepth"]:checked').value;
+    var samplerate = document.querySelector('input[name = "samplerate"]:checked').value;
+    var channels = document.querySelector('input[name = "channels"]:checked').value;
+    var bextchoice = document.querySelector('input[name = "bextchoice"]:checked').value;
+
+    var destination = document.getElementById('destination').value;
+    var id = document.getElementById('fileID').value;
+
+    store.set('stored-br', bitdepth);
+    store.set('stored-sr', samplerate);
+    store.set('stored-ch', channels);
+    store.set('stored-bext',bextchoice);
+    store.set('stored-dest', destination);
+}
 
 function getSettings() {
     var bitdepth = document.querySelector('input[name = "bitdepth"]:checked').value;
